@@ -1,5 +1,5 @@
 import Expenses from "@/components/evaluator/sections/expenses";
-import FinanceAssistant from "@/components/evaluator/sections/finance-assistant";
+import FinanceAssistant from "@/components/evaluator/sections/finance-assistant/finance-assistant";
 import Reputation from "@/components/evaluator/sections/reputation/reputation";
 import SocialLinking from "@/components/evaluator/sections/social-linking/social-linking";
 
