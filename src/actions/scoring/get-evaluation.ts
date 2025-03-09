@@ -8,5 +8,7 @@ export default async function getEvaluation(endpoint: string, id: number) {
 
   const responseBody = await res.json();
 
+  console.log(responseBody)
+
   return responseBody;
 }
