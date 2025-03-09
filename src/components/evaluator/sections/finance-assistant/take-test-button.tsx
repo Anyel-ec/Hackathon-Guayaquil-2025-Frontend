@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { FinanceTest } from "@/lib/models/finance-test";
+import { FinanceTest } from "@/lib/models/finance-assistant/finance-test";
 import { useState } from "react";
 import {
   Dialog,
