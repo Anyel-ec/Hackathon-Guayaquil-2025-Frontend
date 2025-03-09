@@ -27,29 +27,32 @@ export default function SocialTipButton({
 }: SocialTipButtonProps) {
   const lowerCasedSocialNetwork: string = socialNetwork.toLowerCase();
 
-  const [responseBody, setResponseBody] = useState<any>(null);
+ /*  const [responseBody, setResponseBody] = useState<any>(null);
   const [proceed, setProceed] = useState<boolean>(false);
 
   let endpoint: string;
+  let id: number = 0;
 
   if (lowerCasedSocialNetwork === "facebook") {
     endpoint = API_ENDPOINTS.GET_FACEBOOK_EVALUATION;
+    id = 1020;
   } else {
     endpoint = API_ENDPOINTS.GET_LINKEDIN_EVALUATION;
+    id = 640;
   }
 
   useEffect(() => {
     if (!proceed) return;
-    getEvaluation(endpoint).then((response) => {
+    getEvaluation(endpoint, id).then((response) => {
       setResponseBody(response);
       setProceed(false);
     });
-  }, [proceed]);
+  }, [proceed]); */
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button onClick={(() => setProceed(true))} variant="outline" size="icon">
+        <Button onClick={(() => {}/* setProceed(true) */)} variant="outline" size="icon">
           <Lightbulb color="var(--primary)" size={24} />
         </Button>
       </DialogTrigger>
@@ -67,11 +70,11 @@ export default function SocialTipButton({
             </div>
           </DialogTitle>
         </DialogHeader>
-        {responseBody && lowerCasedSocialNetwork === "facebook" && (
-          <FacebookResultRenderer result={responseBody as FacebookResult} />
+        {lowerCasedSocialNetwork === "facebook" && (
+          <FacebookResultRenderer result={result as FacebookResult} />
         )}
-        {responseBody && lowerCasedSocialNetwork === "linkedin" && (
-          <LinkedInResultRenderer result={responseBody as LinkedInResult} />
+        {lowerCasedSocialNetwork === "linkedin" && (
+          <LinkedInResultRenderer result={result as LinkedInResult} />
         )}
       </DialogContent>
     </Dialog>

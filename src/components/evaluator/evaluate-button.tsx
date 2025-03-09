@@ -41,7 +41,7 @@ export default function EvaluateButton() {
         <div className="flex flex-col items-center gap-2">
           {loading ? (
             <SpinnerDotted
-              size={100}
+              size={150}
               thickness={100}
               speed={100}
               color="(var(--primary-foreground))"
@@ -49,7 +49,7 @@ export default function EvaluateButton() {
           ) : (
             <React.Fragment>
               <p className="text-xs">Posible Crédito</p>
-              <p className="text-5xl font-black">$ 900.00</p>
+              <p className="text-5xl font-black">$ ###.##</p>
               <Button variant="link" className="text-primary-foreground">
                 Solicítalo Aquí
               </Button>
