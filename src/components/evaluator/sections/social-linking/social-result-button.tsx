@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,6 +12,9 @@ import { Lightbulb } from "lucide-react";
 import Image from "next/image";
 import FacebookResultRenderer from "./renderers/facebook-result-renderer";
 import LinkedInResultRenderer from "./renderers/linkedin-result-renderer";
+import { API_ENDPOINTS } from "@/lib/consts/endpoints/api";
+import { useEffect, useState } from "react";
+import getEvaluation from "@/actions/scoring/get-evaluation";
 
 interface SocialTipButtonProps {
   socialNetwork: string;
@@ -22,32 +27,51 @@ export default function SocialTipButton({
 }: SocialTipButtonProps) {
   const lowerCasedSocialNetwork: string = socialNetwork.toLowerCase();
 
+  const [responseBody, setResponseBody] = useState<any>(null);
+  const [proceed, setProceed] = useState<boolean>(false);
+
+  let endpoint: string;
+
+  if (lowerCasedSocialNetwork === "facebook") {
+    endpoint = API_ENDPOINTS.GET_FACEBOOK_EVALUATION;
+  } else {
+    endpoint = API_ENDPOINTS.GET_LINKEDIN_EVALUATION;
+  }
+
+  useEffect(() => {
+    if (!proceed) return;
+    getEvaluation(endpoint).then((response) => {
+      setResponseBody(response);
+      setProceed(false);
+    });
+  }, [proceed]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button onClick={(() => setProceed(true))} variant="outline" size="icon">
           <Lightbulb color="var(--primary)" size={24} />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle asChild>
-        <div className="flex gap-4 items-center">
-          <Image
-            src={`/${lowerCasedSocialNetwork}.png`}
-            alt={socialNetwork}
-            height={24}
-            width={24}
-          />
-          <p>Resultados</p>
-        </div>
+            <div className="flex gap-4 items-center">
+              <Image
+                src={`/${lowerCasedSocialNetwork}.png`}
+                alt={socialNetwork}
+                height={24}
+                width={24}
+              />
+              <p>Resultados</p>
+            </div>
           </DialogTitle>
         </DialogHeader>
-        {lowerCasedSocialNetwork === "facebook" && (
-          <FacebookResultRenderer result={result as FacebookResult} />
+        {responseBody && lowerCasedSocialNetwork === "facebook" && (
+          <FacebookResultRenderer result={responseBody as FacebookResult} />
         )}
-        {lowerCasedSocialNetwork === "linkedin" && (
-          <LinkedInResultRenderer result={result as LinkedInResult} />
+        {responseBody && lowerCasedSocialNetwork === "linkedin" && (
+          <LinkedInResultRenderer result={responseBody as LinkedInResult} />
         )}
       </DialogContent>
     </Dialog>

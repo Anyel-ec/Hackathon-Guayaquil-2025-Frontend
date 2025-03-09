@@ -25,7 +25,7 @@ export default async function BuroScore() {
   const score: number = responseBody[0].score;
 
   if (score >= parseInt(process.env.BURO_SCORE_THRESHOLD || "1000")) {
-    return <p>TODO: redirect to some default page</p>;
+    return redirect("https://apps.bancoguayaquil.com/personas/creditos/login");
   }
 
   return redirect("/evaluator");
