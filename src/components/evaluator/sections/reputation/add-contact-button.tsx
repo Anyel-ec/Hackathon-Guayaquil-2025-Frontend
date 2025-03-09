@@ -67,7 +67,7 @@ export default function AddReputationContactButton({
         <DialogHeader>
           <DialogTitle>Añadir Contacto de Reputación</DialogTitle>
           <DialogDescription>
-            Solicita a un conocido tuyo que avale tu reputación.
+            Solicita a un conocido tuyo que respalde tu reputación.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -109,7 +109,7 @@ export default function AddReputationContactButton({
                 disabled={!form.formState.isValid}
                 className="w-full mt-4"
               >
-                Solicitar Aval
+                Solicitar Respaldo
               </Button>
             </DialogClose>
           </form>

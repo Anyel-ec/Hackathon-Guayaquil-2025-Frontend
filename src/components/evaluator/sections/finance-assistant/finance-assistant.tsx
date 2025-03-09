@@ -14,8 +14,14 @@ export default function FinanceAssistant() {
         <p className="text-xs">Puntaje</p>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <p className="text-sm text-primary">¡Tienes un test disponible!</p>
-        <TakeTestButton sumPoints={(points) => setScore(score + points)} />
+        <p className="text-sm text-primary text-center">
+          {score > 0
+            ? "No hay más tests por el momento."
+            : "¡Tienes un test disponible!"}
+        </p>
+        {score === 0 && (
+          <TakeTestButton sumPoints={(points) => setScore(score + points)} />
+        )}
       </div>
     </EvaluatorSection>
   );

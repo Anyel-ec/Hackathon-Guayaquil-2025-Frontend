@@ -31,7 +31,6 @@ export default function EvaluateButton() {
           Evaluar
         </button>
       </DialogTrigger>
-
       <DialogContent
         hideClose
         className="rounded-full w-96 h-96 p-6 bg-primary text-primary-foreground"
@@ -39,7 +38,6 @@ export default function EvaluateButton() {
         <DialogHeader>
           <DialogTitle className="text-center">¡Magia!</DialogTitle>
         </DialogHeader>
-
         <div className="flex flex-col items-center gap-2">
           {loading ? (
             <SpinnerDotted
