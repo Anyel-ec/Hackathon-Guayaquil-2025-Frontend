@@ -27,7 +27,7 @@ export default function SocialTipButton({
 }: SocialTipButtonProps) {
   const lowerCasedSocialNetwork: string = socialNetwork.toLowerCase();
 
- /*  const [responseBody, setResponseBody] = useState<any>(null);
+  const [responseBody, setResponseBody] = useState<any>(null);
   const [proceed, setProceed] = useState<boolean>(false);
 
   let endpoint: string;
@@ -47,12 +47,12 @@ export default function SocialTipButton({
       setResponseBody(response);
       setProceed(false);
     });
-  }, [proceed]); */
+  }, [proceed]);
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button onClick={(() => {}/* setProceed(true) */)} variant="outline" size="icon">
+        <Button onClick={(() => setProceed(true))} variant="outline" size="icon">
           <Lightbulb color="var(--primary)" size={24} />
         </Button>
       </DialogTrigger>
@@ -70,11 +70,11 @@ export default function SocialTipButton({
             </div>
           </DialogTitle>
         </DialogHeader>
-        {lowerCasedSocialNetwork === "facebook" && (
-          <FacebookResultRenderer result={result as FacebookResult} />
+        {responseBody && lowerCasedSocialNetwork === "facebook" && (
+          <FacebookResultRenderer result={responseBody as FacebookResult} />
         )}
-        {lowerCasedSocialNetwork === "linkedin" && (
-          <LinkedInResultRenderer result={result as LinkedInResult} />
+        {responseBody && lowerCasedSocialNetwork === "linkedin" && (
+          <LinkedInResultRenderer result={responseBody as LinkedInResult} />
         )}
       </DialogContent>
     </Dialog>
