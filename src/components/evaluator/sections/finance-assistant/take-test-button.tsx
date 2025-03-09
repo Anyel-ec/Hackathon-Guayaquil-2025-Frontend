@@ -11,11 +11,13 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { useEffect } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
 
 const exampleTest: FinanceTest = {
   questions: [
@@ -84,7 +86,7 @@ export default function TakeTestButton({sumPoints}: TakeTestButtonProps) {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [currentValue, setCurrentValue] = useState<string>("");
   const [showCurrentCorrect, setShowCurrentCorrect] = useState<boolean>(false);
-  const [currentRemainingTime, setCurrentRemainingTime] = useState<number>(10);
+  const [currentRemainingTime, setCurrentRemainingTime] = useState<number>(100);
   const [initTest, setInitTest] = useState<boolean>(false);
 
   function handleAnswer() {
@@ -97,7 +99,7 @@ export default function TakeTestButton({sumPoints}: TakeTestButtonProps) {
       setTimeout(() => {
         setShowCurrentCorrect(false);
         setCurrentQuestion((prev) => prev + 1);
-        setCurrentRemainingTime(10);
+        setCurrentRemainingTime(100);
       }, 1000);
     } else {
       sumPoints(test.score);
@@ -115,7 +117,7 @@ export default function TakeTestButton({sumPoints}: TakeTestButtonProps) {
     if (!initTest) return;
     const timer = setInterval(() => {
       setCurrentRemainingTime((prev) => prev - 1);
-    }, 1000);
+    }, 100);
     return () => clearInterval(timer);
   }, [initTest]);
 
@@ -129,6 +131,9 @@ export default function TakeTestButton({sumPoints}: TakeTestButtonProps) {
       <DialogContent>
         <DialogHeader className="mb-2">
           <DialogTitle>{test.questions[currentQuestion].question}</DialogTitle>
+          <DialogDescription asChild>
+            <Progress value={currentRemainingTime} />
+          </DialogDescription>
         </DialogHeader>
         {currentQuestion < test.questions.length ? (
           <RadioGroup value={currentValue} onValueChange={setCurrentValue}>
