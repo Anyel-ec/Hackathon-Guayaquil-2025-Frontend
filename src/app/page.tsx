@@ -57,7 +57,7 @@ export default function Home() {
           asChild={form.formState.isValid}
           className="w-full mt-4"
         >
-          <Link href={`/verification/${form.watch("cedula")}`}>Iniciar</Link>
+          <Link href={`verification/${form.watch("cedula")}`}>Iniciar</Link>
         </Button>
       </div>
     </main>
